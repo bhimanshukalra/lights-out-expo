@@ -3,7 +3,7 @@
     "name": "Lights Out",
     "slug": "lights-out",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "lightsout",
     "userInterfaceStyle": "dark",

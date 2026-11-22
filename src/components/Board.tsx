@@ -15,7 +15,7 @@ interface Props {
 }
 
 const RIPPLE_MS = 20; // stagger per tile of distance from the tapped tile
-const MAX_BOARD = 560; // keep tablets from getting enormous tiles
+const MAX_BOARD = 640; // keep large screens from getting enormous tiles
 
 export function Board({ board, maxSize, disabled, lastTap, hint, onTap }: Props) {
   const n = board.length;

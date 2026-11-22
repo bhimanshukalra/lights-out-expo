@@ -108,7 +108,7 @@ Suggested order: twist per puzzle, then locked tiles, then gremlin.
 
 These were open at the start and are now settled:
 
-1. **Orientation:** portrait-only.
+1. **Orientation:** unlocked. A two-pane layout (controls beside the board) is used whenever the window is wider than tall, which covers the open iPhone Duo and rotated phones.
 2. **Web:** not supported. The app targets iOS and Android only, and the web config and dependencies were removed.
 3. **Grid-size selector:** shipped in Phase 7.
 4. **Tablets:** out of scope (`supportsTablet` is false). Layout was verified on an iPhone 16e and an iPhone Duo (open and closed).

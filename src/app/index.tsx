@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import { type LayoutChangeEvent, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  type LayoutChangeEvent,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 import { Board } from "@/components/Board";
 import { Header } from "@/components/Header";
@@ -24,6 +32,14 @@ export default function Index() {
   } = useGame();
   const { settings, loaded, toggleHaptics, setSize } = useSettings();
   const [area, setArea] = useState({ width: 0, height: 0 });
+  const { width, height } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
+
+  // Wide windows (a rotated phone, the open Duo) put the controls beside the board.
+  const wide = width > height;
+  const compact = !wide && height < COMPACT_HEIGHT;
+  // Keep the title off the very edge where the system provides no top inset.
+  const topPad = Math.max(0, MIN_TOP_PADDING - insets.top);
 
   const onAreaLayout = useCallback((e: LayoutChangeEvent) => {
     const { width, height } = e.nativeEvent.layout;
@@ -60,18 +76,28 @@ export default function Index() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <Header
-          moves={state.moves}
-          best={best}
-          size={state.size}
-          onSelectSize={onSelectSize}
-          haptics={settings.haptics}
-          onToggleHaptics={toggleHaptics}
-          onHint={showHint}
-          onRestart={restart}
-          onNew={() => startNew()}
-        />
+      <View
+        style={[
+          styles.content,
+          { paddingTop: topPad },
+          wide && styles.contentWide,
+        ]}
+      >
+        <View style={wide ? styles.sidePane : undefined}>
+          <Header
+            compact={compact}
+            side={wide}
+            moves={state.moves}
+            best={best}
+            size={state.size}
+            onSelectSize={onSelectSize}
+            haptics={settings.haptics}
+            onToggleHaptics={toggleHaptics}
+            onHint={showHint}
+            onRestart={restart}
+            onNew={() => startNew()}
+          />
+        </View>
         <View style={styles.boardArea} onLayout={onAreaLayout}>
           <Board
             board={state.board}
@@ -96,9 +122,18 @@ export default function Index() {
 }
 
 const BOARD_MARGIN = 16;
+const MIN_TOP_PADDING = 16;
+const COMPACT_HEIGHT = 700;
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#0B0B10" },
   content: { flex: 1 },
+  contentWide: { flexDirection: "row" },
+  sidePane: {
+    width: 360,
+    maxWidth: "45%",
+    justifyContent: "center",
+    paddingHorizontal: 16,
+  },
   boardArea: { flex: 1, alignItems: "center", justifyContent: "center" },
 });

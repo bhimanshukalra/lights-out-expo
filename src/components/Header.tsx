@@ -12,20 +12,48 @@ interface Props {
   onHint: () => void;
   onRestart: () => void;
   onNew: () => void;
+  /** Tighter spacing for short screens. */
+  compact?: boolean;
+  /** Header sits beside the board, so it needs no bottom padding. */
+  side?: boolean;
 }
 
-export function Header({ moves, best, size, onSelectSize, haptics, onToggleHaptics, onHint, onRestart, onNew }: Props) {
+export function Header({
+  moves,
+  best,
+  size,
+  onSelectSize,
+  haptics,
+  onToggleHaptics,
+  onHint,
+  onRestart,
+  onNew,
+  compact,
+  side,
+}: Props) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Lights Out</Text>
+    <View
+      style={[
+        styles.container,
+        compact && styles.containerCompact,
+        side && styles.containerSide,
+      ]}
+    >
+      <Text style={[styles.title, compact && styles.titleCompact]}>
+        Lights Out
+      </Text>
       <View style={styles.statsRow}>
         <View style={styles.stats}>
           <Text style={styles.label}>Moves</Text>
-          <Text style={styles.value}>{moves}</Text>
+          <Text style={[styles.value, compact && styles.valueCompact]}>
+            {moves}
+          </Text>
         </View>
         <View style={styles.stats}>
           <Text style={styles.label}>Best</Text>
-          <Text style={styles.value}>{best ?? "–"}</Text>
+          <Text style={[styles.value, compact && styles.valueCompact]}>
+            {best ?? "–"}
+          </Text>
         </View>
       </View>
       <View style={styles.buttons}>
@@ -43,7 +71,9 @@ export function Header({ moves, best, size, onSelectSize, haptics, onToggleHapti
             onPress={() => n !== size && onSelectSize(n)}
             style={[styles.chip, n === size && styles.chipActive]}
           >
-            <Text style={[styles.chipText, n === size && styles.chipTextActive]}>
+            <Text
+              style={[styles.chipText, n === size && styles.chipTextActive]}
+            >
               {n}×{n}
             </Text>
           </Pressable>
@@ -89,12 +119,21 @@ function Button({
 
 const styles = StyleSheet.create({
   container: { alignItems: "center", gap: 16, paddingBottom: 24 },
+  containerCompact: { gap: 10, paddingBottom: 12 },
+  containerSide: { paddingBottom: 0 },
   title: { color: "#FFC93C", fontSize: 32, fontWeight: "800" },
+  titleCompact: { fontSize: 26 },
   statsRow: { flexDirection: "row", gap: 40 },
   stats: { alignItems: "center" },
   label: { color: "#9A9AA8", fontSize: 14, textTransform: "uppercase" },
   value: { color: "#FFFFFF", fontSize: 40, fontWeight: "700" },
-  sizes: { flexDirection: "row", gap: 8 },
+  valueCompact: { fontSize: 30 },
+  sizes: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 8,
+  },
   chip: {
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -105,7 +144,12 @@ const styles = StyleSheet.create({
   chipText: { color: "#9A9AA8", fontSize: 14, fontWeight: "600" },
   chipTextActive: { color: "#0B0B10" },
   toggle: { color: "#9A9AA8", fontSize: 14 },
-  buttons: { flexDirection: "row", gap: 12 },
+  buttons: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 12,
+  },
   button: {
     paddingHorizontal: 20,
     paddingVertical: 12,
