@@ -6,10 +6,11 @@ interface Props {
   moves: number;
   best?: number;
   newBest: boolean;
+  hinted: boolean;
   onPlayAgain: () => void;
 }
 
-export function WinModal({ visible, moves, best, newBest, onPlayAgain }: Props) {
+export function WinModal({ visible, moves, best, newBest, hinted, onPlayAgain }: Props) {
   return (
     <Modal
       visible={visible}
@@ -23,7 +24,9 @@ export function WinModal({ visible, moves, best, newBest, onPlayAgain }: Props) 
           <Text style={styles.body}>
             Solved in {moves} {moves === 1 ? "move" : "moves"}
           </Text>
-          {newBest ? (
+          {hinted ? (
+            <Text style={styles.sub}>Solved with hints, so no best score</Text>
+          ) : newBest ? (
             <Text style={styles.best}>New best!</Text>
           ) : best !== undefined ? (
             <Text style={styles.sub}>Best: {best}</Text>

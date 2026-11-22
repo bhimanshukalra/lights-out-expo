@@ -9,11 +9,12 @@ interface Props {
   onSelectSize: (size: number) => void;
   haptics: boolean;
   onToggleHaptics: () => void;
+  onHint: () => void;
   onRestart: () => void;
   onNew: () => void;
 }
 
-export function Header({ moves, best, size, onSelectSize, haptics, onToggleHaptics, onRestart, onNew }: Props) {
+export function Header({ moves, best, size, onSelectSize, haptics, onToggleHaptics, onHint, onRestart, onNew }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Lights Out</Text>
@@ -29,6 +30,7 @@ export function Header({ moves, best, size, onSelectSize, haptics, onToggleHapti
       </View>
       <View style={styles.buttons}>
         <Button label="Restart" onPress={onRestart} />
+        <Button label="Hint" onPress={onHint} />
         <Button label="New Game" onPress={onNew} primary />
       </View>
       <View style={styles.sizes}>

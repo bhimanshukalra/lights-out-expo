@@ -1,11 +1,14 @@
 import { memo, useEffect } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import Animated, {
+  cancelAnimation,
   interpolate,
   interpolateColor,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
+  withRepeat,
+
   withSpring,
   withTiming,
 } from "react-native-reanimated";
@@ -17,6 +20,8 @@ interface Props {
   lit: boolean;
   /** Ripple delay in ms before this tile animates to its new state. */
   delay?: number;
+  /** Highlight this tile as the suggested next tap. */
+  hint?: boolean;
   disabled?: boolean;
   onPress: (row: number, col: number) => void;
 }
@@ -25,9 +30,10 @@ const GAP = 6;
 const OFF = "#2A2A33";
 const ON = "#FFC93C";
 
-function TileBase({ row, col, size, lit, delay = 0, disabled, onPress }: Props) {
+function TileBase({ row, col, size, lit, delay = 0, hint, disabled, onPress }: Props) {
   const progress = useSharedValue(lit ? 1 : 0);
   const scale = useSharedValue(1);
+  const pulse = useSharedValue(0);
 
   useEffect(() => {
     progress.set(withDelay(delay, withTiming(lit ? 1 : 0, { duration: 150 })));
@@ -35,10 +41,20 @@ function TileBase({ row, col, size, lit, delay = 0, disabled, onPress }: Props) 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lit]);
 
+  useEffect(() => {
+    if (hint) {
+      pulse.set(withRepeat(withTiming(1, { duration: 600 }), -1, true));
+    } else {
+      cancelAnimation(pulse);
+      pulse.set(withTiming(0, { duration: 150 }));
+    }
+  }, [hint, pulse]);
+
   const animatedStyle = useAnimatedStyle(() => ({
     backgroundColor: interpolateColor(progress.get(), [0, 1], [OFF, ON]),
     shadowOpacity: interpolate(progress.get(), [0, 1], [0, 0.8]),
     elevation: interpolate(progress.get(), [0, 1], [0, 8]),
+    borderColor: `rgba(255,255,255,${pulse.get()})`,
     transform: [{ scale: scale.get() }],
   }));
 
@@ -67,6 +83,7 @@ const styles = StyleSheet.create({
   tile: {
     flex: 1,
     borderRadius: 10,
+    borderWidth: 3,
     shadowColor: ON,
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 12,

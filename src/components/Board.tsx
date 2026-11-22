@@ -10,13 +10,14 @@ interface Props {
   maxSize: number;
   disabled?: boolean;
   lastTap?: LastTap | null;
+  hint?: LastTap | null;
   onTap: (row: number, col: number) => void;
 }
 
 const RIPPLE_MS = 20; // stagger per tile of distance from the tapped tile
 const MAX_BOARD = 560; // keep tablets from getting enormous tiles
 
-export function Board({ board, maxSize, disabled, lastTap, onTap }: Props) {
+export function Board({ board, maxSize, disabled, lastTap, hint, onTap }: Props) {
   const n = board.length;
   const tileSize = Math.max(0, Math.floor(Math.min(maxSize, MAX_BOARD) / n));
 
@@ -31,6 +32,7 @@ export function Board({ board, maxSize, disabled, lastTap, onTap }: Props) {
               col={c}
               size={tileSize}
               lit={lit}
+              hint={hint?.row === r && hint?.col === c}
               delay={
                 lastTap
                   ? (Math.abs(r - lastTap.row) + Math.abs(c - lastTap.col)) *

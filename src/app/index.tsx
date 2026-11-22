@@ -10,7 +10,18 @@ import { useSettings } from "@/hooks/useSettings";
 import { tapHaptic, winHaptic } from "@/lib/haptics";
 
 export default function Index() {
-  const { state, lastTap, best, newBest, tap, restart, startNew } = useGame();
+  const {
+    state,
+    lastTap,
+    hint,
+    hinted,
+    best,
+    newBest,
+    tap,
+    showHint,
+    restart,
+    startNew,
+  } = useGame();
   const { settings, loaded, toggleHaptics, setSize } = useSettings();
   const [area, setArea] = useState({ width: 0, height: 0 });
 
@@ -57,6 +68,7 @@ export default function Index() {
           onSelectSize={onSelectSize}
           haptics={settings.haptics}
           onToggleHaptics={toggleHaptics}
+          onHint={showHint}
           onRestart={restart}
           onNew={() => startNew()}
         />
@@ -66,6 +78,7 @@ export default function Index() {
             maxSize={Math.min(area.width, area.height) - BOARD_MARGIN * 2}
             disabled={state.solved}
             lastTap={lastTap}
+            hint={hint}
             onTap={onTap}
           />
         </View>
@@ -75,6 +88,7 @@ export default function Index() {
         moves={state.moves}
         best={best}
         newBest={newBest}
+        hinted={hinted}
         onPlayAgain={() => startNew()}
       />
     </SafeAreaView>
