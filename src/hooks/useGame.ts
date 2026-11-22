@@ -5,8 +5,14 @@ import { newGame, reducer as gameReducer } from "@/game/reducer";
 import type { Action, BestScores, GameState } from "@/game/types";
 import { isNewBest, loadBests, saveBest } from "@/storage/bestScores";
 
+export interface LastTap {
+  row: number;
+  col: number;
+}
+
 export interface HookState {
   game: GameState;
+  lastTap: LastTap | null; // origin of the latest tap, for the ripple animation
   bests: BestScores;
   newBest: boolean; // the current win set a new best
 }
@@ -24,24 +30,32 @@ export function reducer(state: HookState, action: HookAction): HookState {
   }
 
   const game = gameReducer(state.game, action);
+  const lastTap =
+    action.type === "tap" ? { row: action.row, col: action.col } : null;
   if (game === state.game) return state;
 
   if (game.solved && !state.game.solved) {
     const beaten = isNewBest(state.bests, game.size, game.moves);
     return {
       game,
+      lastTap,
       newBest: beaten,
       bests: beaten ? { ...state.bests, [game.size]: game.moves } : state.bests,
     };
   }
-  return { ...state, game, newBest: game.solved ? state.newBest : false };
+  return {
+    ...state,
+    game,
+    lastTap,
+    newBest: game.solved ? state.newBest : false,
+  };
 }
 
 export function useGame(size: number = DEFAULT_SIZE) {
-  const [{ game, bests, newBest }, dispatch] = useReducer(
+  const [{ game, bests, newBest, lastTap }, dispatch] = useReducer(
     reducer,
     size,
-    (s): HookState => ({ game: newGame(s), bests: {}, newBest: false }),
+    (s): HookState => ({ game: newGame(s), lastTap: null, bests: {}, newBest: false }),
   );
 
   useEffect(() => {
@@ -70,5 +84,5 @@ export function useGame(size: number = DEFAULT_SIZE) {
     [],
   );
 
-  return { state: game, best: bests[game.size], newBest, tap, restart, startNew };
+  return { state: game, lastTap, best: bests[game.size], newBest, tap, restart, startNew };
 }

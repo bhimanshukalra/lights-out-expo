@@ -1,4 +1,5 @@
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import Animated, { ZoomIn } from "react-native-reanimated";
 
 interface Props {
   visible: boolean;
@@ -17,7 +18,7 @@ export function WinModal({ visible, moves, best, newBest, onPlayAgain }: Props) 
       onRequestClose={onPlayAgain}
     >
       <View style={styles.backdrop}>
-        <View style={styles.card}>
+        <Animated.View entering={ZoomIn.springify().damping(14)} style={styles.card}>
           <Text style={styles.title}>Lights out!</Text>
           <Text style={styles.body}>
             Solved in {moves} {moves === 1 ? "move" : "moves"}
@@ -34,7 +35,7 @@ export function WinModal({ visible, moves, best, newBest, onPlayAgain }: Props) 
           >
             <Text style={styles.buttonText}>Play Again</Text>
           </Pressable>
-        </View>
+        </Animated.View>
       </View>
     </Modal>
   );

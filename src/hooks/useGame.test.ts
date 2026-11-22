@@ -8,6 +8,7 @@ const almostSolved = (): GameState => {
 };
 const start = (bests = {}): HookState => ({
   game: almostSolved(),
+  lastTap: null,
   bests,
   newBest: false,
 });

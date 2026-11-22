@@ -55,12 +55,12 @@ Phased breakdown of [MVP.md](MVP.md). The repo is already scaffolded from the Ex
 
 ## Phase 4: Animation, haptics, polish (~2-3 hrs)
 
-- [ ] Animated `Tile`: shared `lit` value, `withTiming` 150 ms, `interpolateColor`, spring scale on press.
-- [ ] Warm yellow glow for lit tiles, dark gray for off. Check contrast.
-- [ ] Ripple stagger on neighbor toggles (20 ms per distance).
-- [ ] Haptics on tap and win, wrapped in try/catch, with a persisted settings toggle.
-- [ ] Win modal fade and scale animation. Confetti is optional.
-- [ ] Verify there are no dropped taps on rapid tapping.
+- [x] Animated `Tile`: shared `lit` value, `withTiming` 150 ms, `interpolateColor`, spring scale on press.
+- [x] Warm yellow glow for lit tiles, dark gray for off. Check contrast.
+- [x] Ripple stagger on neighbor toggles (20 ms per distance).
+- [x] Haptics on tap and win, wrapped in try/catch, with a persisted settings toggle.
+- [x] Win modal fade and scale animation. Confetti is optional.
+- [x] Verify there are no dropped taps on rapid tapping.
 
 **Done when:** it feels smooth, and it works with haptics off or unavailable.
 

@@ -3,11 +3,13 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 interface Props {
   moves: number;
   best?: number;
+  haptics: boolean;
+  onToggleHaptics: () => void;
   onRestart: () => void;
   onNew: () => void;
 }
 
-export function Header({ moves, best, onRestart, onNew }: Props) {
+export function Header({ moves, best, haptics, onToggleHaptics, onRestart, onNew }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Lights Out</Text>
@@ -25,6 +27,14 @@ export function Header({ moves, best, onRestart, onNew }: Props) {
         <Button label="Restart" onPress={onRestart} />
         <Button label="New Game" onPress={onNew} primary />
       </View>
+      <Pressable
+        accessibilityRole="switch"
+        accessibilityState={{ checked: haptics }}
+        accessibilityLabel="Haptic feedback"
+        onPress={onToggleHaptics}
+      >
+        <Text style={styles.toggle}>Haptics: {haptics ? "On" : "Off"}</Text>
+      </Pressable>
     </View>
   );
 }
@@ -62,6 +72,7 @@ const styles = StyleSheet.create({
   stats: { alignItems: "center" },
   label: { color: "#9A9AA8", fontSize: 14, textTransform: "uppercase" },
   value: { color: "#FFFFFF", fontSize: 40, fontWeight: "700" },
+  toggle: { color: "#9A9AA8", fontSize: 14 },
   buttons: { flexDirection: "row", gap: 12 },
   button: {
     paddingHorizontal: 20,
