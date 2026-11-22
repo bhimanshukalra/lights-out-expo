@@ -1,5 +1,7 @@
 # Lights Out: React Native (Expo) Build Guide
 
+> **Note:** This is the original build guide the project started from. The app has since been built and extended (hints, grid sizes, Expo Router layout under `src/app`). See [PLAN.md](PLAN.md) for what was built and [README.md](README.md) for the current app.
+
 ## Overview
 
 Lights Out is a single-player puzzle. A grid of tiles (default 5x5) starts with some lights on. Tapping a tile toggles it and its up, down, left and right neighbors. You win when every light is off. This guide builds a polished, offline, single-device version in under one day with Expo only (no native modules to eject).

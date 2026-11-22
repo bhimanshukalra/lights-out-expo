@@ -1,5 +1,7 @@
 # Lights Out: Build Plan
 
+> **Status:** Phases 0 to 7 are done, plus the hint feature. Phase 8 is a list of ideas. Still open: a manual win playthrough, an Android check and a preview build. See the [README](README.md) for the finished app.
+
 Phased breakdown of [MVP.md](MVP.md). The repo is already scaffolded from the Expo Router template (SDK 58), so this plan adapts the guide: the single screen lives at `src/app/index.tsx` instead of `App.tsx`.
 
 ## Project notes
@@ -102,10 +104,12 @@ Goal: make each puzzle feel less predictable without ever producing an unsolvabl
 
 Suggested order: twist per puzzle, then locked tiles, then gremlin.
 
-## Open decisions
+## Decisions
 
-1. **Orientation:** portrait-only (simpler) or unlocked?
-2. **Web:** support it, or iOS and Android only?
-3. **Grid-size selector:** in the MVP or deferred to stretch?
+These were open at the start and are now settled:
 
-Defaults if undecided: portrait-only, mobile only, selector deferred.
+1. **Orientation:** portrait-only.
+2. **Web:** not supported. The app targets iOS and Android only, and the web config and dependencies were removed.
+3. **Grid-size selector:** shipped in Phase 7.
+4. **Tablets:** out of scope (`supportsTablet` is false). Layout was verified on an iPhone 16e and an iPhone Duo (open and closed).
+5. **Bundle identifier and package name:** `com.lightsout.app` is a placeholder. Change it in `app.json` before any store submission.

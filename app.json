@@ -9,7 +9,8 @@
     "userInterfaceStyle": "dark",
     "ios": {
       "icon": "./assets/images/icon.png",
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.lightsout.app"
     },
     "android": {
       "adaptiveIcon": {
@@ -18,10 +19,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
-    },
-    "web": {
-      "favicon": "./assets/images/favicon.png"
+      "predictiveBackGestureEnabled": false,
+      "package": "com.lightsout.app"
     },
     "plugins": [
       "expo-router",
@@ -37,6 +36,7 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "description": "A polished, offline Lights Out puzzle with hints and multiple grid sizes."
   }
 }
