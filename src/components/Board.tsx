@@ -1,4 +1,4 @@
-import { StyleSheet, useWindowDimensions, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import type { Board as BoardType } from "@/game/types";
 import type { LastTap } from "@/hooks/useGame";
@@ -6,25 +6,19 @@ import { Tile } from "./Tile";
 
 interface Props {
   board: BoardType;
+  /** Largest square (in px) the board may occupy, measured by the parent. */
+  maxSize: number;
   disabled?: boolean;
   lastTap?: LastTap | null;
   onTap: (row: number, col: number) => void;
 }
 
-const PADDING = 32;
 const RIPPLE_MS = 20; // stagger per tile of distance from the tapped tile
 const MAX_BOARD = 560; // keep tablets from getting enormous tiles
-const RESERVED_HEIGHT = 300; // header, buttons and safe-area insets
 
-export function Board({ board, disabled, lastTap, onTap }: Props) {
-  const { width, height } = useWindowDimensions();
+export function Board({ board, maxSize, disabled, lastTap, onTap }: Props) {
   const n = board.length;
-  const available = Math.min(
-    width - PADDING,
-    height - RESERVED_HEIGHT,
-    MAX_BOARD,
-  );
-  const tileSize = Math.floor(available / n);
+  const tileSize = Math.max(0, Math.floor(Math.min(maxSize, MAX_BOARD) / n));
 
   return (
     <View style={styles.board}>

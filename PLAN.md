@@ -66,9 +66,9 @@ Phased breakdown of [MVP.md](MVP.md). The repo is already scaffolded from the Ex
 
 ## Phase 5: Layout robustness (~1 hr)
 
-- [ ] Verify small phones and tablets.
-- [ ] Verify landscape, if orientation is unlocked.
-- [ ] Verify safe areas.
+- [x] Verify target devices: iPhone 16e and iPhone Duo (open and closed). Tablets are out of scope.
+- [x] Landscape: N/A, app is portrait-only (see app.json).
+- [x] Verify safe areas.
 
 ## Phase 6: Ship prep (~1-2 hrs)
 
