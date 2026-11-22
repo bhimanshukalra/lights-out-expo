@@ -3,21 +3,30 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Board } from "@/components/Board";
 import { Header } from "@/components/Header";
+import { WinModal } from "@/components/WinModal";
 import { useGame } from "@/hooks/useGame";
 
 export default function Index() {
-  const { state, tap, restart, startNew } = useGame();
+  const { state, best, newBest, tap, restart, startNew } = useGame();
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Header
           moves={state.moves}
+          best={best}
           onRestart={restart}
           onNew={() => startNew()}
         />
         <Board board={state.board} disabled={state.solved} onTap={tap} />
       </View>
+      <WinModal
+        visible={state.solved}
+        moves={state.moves}
+        best={best}
+        newBest={newBest}
+        onPlayAgain={() => startNew()}
+      />
     </SafeAreaView>
   );
 }

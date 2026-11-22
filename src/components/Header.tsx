@@ -2,17 +2,24 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 
 interface Props {
   moves: number;
+  best?: number;
   onRestart: () => void;
   onNew: () => void;
 }
 
-export function Header({ moves, onRestart, onNew }: Props) {
+export function Header({ moves, best, onRestart, onNew }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Lights Out</Text>
-      <View style={styles.stats}>
-        <Text style={styles.label}>Moves</Text>
-        <Text style={styles.value}>{moves}</Text>
+      <View style={styles.statsRow}>
+        <View style={styles.stats}>
+          <Text style={styles.label}>Moves</Text>
+          <Text style={styles.value}>{moves}</Text>
+        </View>
+        <View style={styles.stats}>
+          <Text style={styles.label}>Best</Text>
+          <Text style={styles.value}>{best ?? "–"}</Text>
+        </View>
       </View>
       <View style={styles.buttons}>
         <Button label="Restart" onPress={onRestart} />
@@ -51,6 +58,7 @@ function Button({
 const styles = StyleSheet.create({
   container: { alignItems: "center", gap: 16, paddingBottom: 24 },
   title: { color: "#FFC93C", fontSize: 32, fontWeight: "800" },
+  statsRow: { flexDirection: "row", gap: 40 },
   stats: { alignItems: "center" },
   label: { color: "#9A9AA8", fontSize: 14, textTransform: "uppercase" },
   value: { color: "#FFFFFF", fontSize: 40, fontWeight: "700" },

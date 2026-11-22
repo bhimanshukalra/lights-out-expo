@@ -46,10 +46,10 @@ Phased breakdown of [MVP.md](MVP.md). The repo is already scaffolded from the Ex
 
 ## Phase 3: Persistence and win flow (~2 hrs)
 
-- [ ] `src/storage/bestScores.ts`: `loadBests` and `saveBest`, failure-safe, keyed by grid size.
-- [ ] Load bests on mount. Save when solved and the score is beaten.
-- [ ] Show the best score in `Header`.
-- [ ] `src/components/WinModal.tsx`: "Solved in X moves", new-best indicator, Play Again. It appears once per win.
+- [x] `src/storage/bestScores.ts`: `loadBests` and `saveBest`, failure-safe, keyed by grid size.
+- [x] Load bests on mount. Save when solved and the score is beaten.
+- [x] Show the best score in `Header`.
+- [x] `src/components/WinModal.tsx`: "Solved in X moves", new-best indicator, Play Again. It appears once per win.
 
 **Done when:** best scores survive an app restart and storage errors do not crash the app.
 
