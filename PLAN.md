@@ -21,16 +21,16 @@ Phased breakdown of [MVP.md](MVP.md). The repo is already scaffolded from the Ex
 
 ## Phase 1: Game logic, pure and tested (~1 hr)
 
-- [ ] `src/game/types.ts`: `Board`, `GameState`, `Action`, `BestScores`.
-- [ ] `src/game/logic.ts`: `toggle`, `isSolved`, `generate`.
-- [ ] `src/game/reducer.ts`: `tap`, `restart`, `new` actions.
-- [ ] Jest tests:
-  - [ ] Corner, edge and center taps flip 3, 4 and 5 tiles.
-  - [ ] Tapping the same tile twice returns the original board.
-  - [ ] `isSolved` is true for an all-off board and false otherwise.
-  - [ ] `generate` never returns a solved board, and replaying its taps solves it.
-  - [ ] Moves increment per tap, and reset on restart and new game.
-  - [ ] Taps are ignored after a win.
+- [x] `src/game/types.ts`: `Board`, `GameState`, `Action`, `BestScores`.
+- [x] `src/game/logic.ts`: `toggle`, `isSolved`, `generate`.
+- [x] `src/game/reducer.ts`: `tap`, `restart`, `new` actions.
+- [x] Jest tests:
+  - [x] Corner, edge and center taps flip 3, 4 and 5 tiles.
+  - [x] Tapping the same tile twice returns the original board.
+  - [x] `isSolved` is true for an all-off board and false otherwise.
+  - [x] `generate` never returns a solved board, and replaying its taps solves it.
+  - [x] Moves increment per tap, and reset on restart and new game.
+  - [x] Taps are ignored after a win.
 
 **Done when:** `jest` passes.
 
