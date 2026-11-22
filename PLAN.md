@@ -11,11 +11,11 @@ Phased breakdown of [MVP.md](MVP.md). The repo is already scaffolded from the Ex
 
 ## Phase 0: Clean the scaffold (~30 min)
 
-- [ ] Delete the template demo: `explore.tsx`, `app-tabs*`, `animated-icon*`, `hint-row`, `web-badge`, `collapsible`, and unused assets.
-- [ ] Make `_layout.tsx` a plain `Stack` or `Slot`, with `index.tsx` as the game screen.
-- [ ] Set dark mode and the app name in `app.json`.
-- [ ] Install `expo-haptics`, `async-storage` and `jest-expo`.
-- [ ] Confirm lint, typecheck and the dev server run.
+- [x] Delete the template demo: `explore.tsx`, `app-tabs*`, `animated-icon*`, `hint-row`, `web-badge`, `collapsible`, and unused assets.
+- [x] Make `_layout.tsx` a plain `Stack` or `Slot`, with `index.tsx` as the game screen.
+- [x] Set dark mode and the app name in `app.json`.
+- [x] Install `expo-haptics`, `async-storage` and `jest-expo`.
+- [x] Confirm lint, typecheck and the dev server run.
 
 **Done when:** the app boots to a blank dark screen.
 
