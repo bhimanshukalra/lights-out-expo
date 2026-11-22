@@ -9,6 +9,7 @@ const DIRS = [
 ];
 
 export const DEFAULT_SIZE = 5;
+export const SIZES = [3, 4, 5, 7] as const;
 
 export function emptyBoard(size: number): Board {
   return Array.from({ length: size }, () => Array<boolean>(size).fill(false));

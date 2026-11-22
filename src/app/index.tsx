@@ -11,7 +11,7 @@ import { tapHaptic, winHaptic } from "@/lib/haptics";
 
 export default function Index() {
   const { state, lastTap, best, newBest, tap, restart, startNew } = useGame();
-  const { settings, toggleHaptics } = useSettings();
+  const { settings, loaded, toggleHaptics, setSize } = useSettings();
   const [area, setArea] = useState({ width: 0, height: 0 });
 
   const onAreaLayout = useCallback((e: LayoutChangeEvent) => {
@@ -27,6 +27,22 @@ export default function Index() {
     [tap],
   );
 
+  // Apply the persisted grid size once it has loaded, if the player hasn't started yet.
+  useEffect(() => {
+    if (loaded && state.moves === 0 && state.size !== settings.size) {
+      startNew(settings.size);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded]);
+
+  const onSelectSize = useCallback(
+    (size: number) => {
+      setSize(size);
+      startNew(size);
+    },
+    [setSize, startNew],
+  );
+
   useEffect(() => {
     if (state.solved) winHaptic();
   }, [state.solved]);
@@ -37,6 +53,8 @@ export default function Index() {
         <Header
           moves={state.moves}
           best={best}
+          size={state.size}
+          onSelectSize={onSelectSize}
           haptics={settings.haptics}
           onToggleHaptics={toggleHaptics}
           onRestart={restart}

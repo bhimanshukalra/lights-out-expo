@@ -79,7 +79,8 @@ Phased breakdown of [MVP.md](MVP.md). The repo is already scaffolded from the Ex
 
 ## Phase 7: Stretch (pick one after MVP)
 
-Suggested order: grid-size selector, Undo, Hint (GF(2) solver), Timer, Levels, Daily puzzle, Themes and sound.
+- [x] Grid-size selector (3x3, 4x4, 5x5, 7x7): chips in the header, last choice persisted, best scores already keyed by size.
+- [ ] Undo, Hint (GF(2) solver), Timer, Levels, Daily puzzle, Themes and sound.
 
 ## Open decisions
 

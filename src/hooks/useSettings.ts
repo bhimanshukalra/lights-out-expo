@@ -10,13 +10,15 @@ import {
 
 export function useSettings() {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
-    loadSettings().then((loaded) => {
+    loadSettings().then((stored) => {
       if (cancelled) return;
-      setSettings(loaded);
-      setHapticsEnabled(loaded.haptics);
+      setSettings(stored);
+      setHapticsEnabled(stored.haptics);
+      setLoaded(true);
     });
     return () => {
       cancelled = true;
@@ -30,5 +32,14 @@ export function useSettings() {
     void saveSettings(next);
   }, [settings]);
 
-  return { settings, toggleHaptics };
+  const setSize = useCallback(
+    (size: number) => {
+      const next = { ...settings, size };
+      setSettings(next);
+      void saveSettings(next);
+    },
+    [settings],
+  );
+
+  return { settings, loaded, toggleHaptics, setSize };
 }
