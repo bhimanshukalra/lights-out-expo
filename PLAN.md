@@ -72,10 +72,10 @@ Phased breakdown of [MVP.md](MVP.md). The repo is already scaffolded from the Ex
 
 ## Phase 6: Ship prep (~1-2 hrs)
 
-- [ ] App icon, adaptive icon, splash screen, app name.
-- [ ] Run the full testing checklist from MVP.md on iOS and Android.
-- [ ] Final `npx expo lint`, `npx tsc --noEmit`, `npx expo-doctor`.
-- [ ] Optional: `eas build --profile preview`.
+- [x] App icon, adaptive icon, splash screen, app name.
+- [ ] Run the full testing checklist from MVP.md on iOS and Android. Logic items are covered by Jest; the win modal, persistence across restart, and Android still need a manual pass.
+- [x] Final `npx expo lint`, `npx tsc --noEmit`, `npx expo-doctor`.
+- [ ] Optional: `eas build --profile preview`. Needs `ios.bundleIdentifier` and `android.package` set in app.json first.
 
 ## Phase 7: Stretch (pick one after MVP)
 
