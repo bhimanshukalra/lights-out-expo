@@ -36,11 +36,11 @@ Phased breakdown of [MVP.md](MVP.md). The repo is already scaffolded from the Ex
 
 ## Phase 2: Playable board (~2 hrs)
 
-- [ ] `src/hooks/useGame.ts`: wraps `useReducer`.
-- [ ] `src/components/Tile.tsx`: plain `Pressable` with static colors.
-- [ ] `src/components/Board.tsx`: responsive size, `tile = floor((min(width, height) - padding) / size)`.
-- [ ] `src/components/Header.tsx`: moves counter, Restart, New Game.
-- [ ] Wire everything up in `src/app/index.tsx`.
+- [x] `src/hooks/useGame.ts`: wraps `useReducer`.
+- [x] `src/components/Tile.tsx`: plain `Pressable` with static colors.
+- [x] `src/components/Board.tsx`: responsive size, `tile = floor((min(width, height) - padding) / size)`.
+- [x] `src/components/Header.tsx`: moves counter, Restart, New Game.
+- [x] Wire everything up in `src/app/index.tsx`.
 
 **Done when:** a full game can be played in a simulator and the solved state is detected.
 
