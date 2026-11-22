@@ -83,6 +83,25 @@ Phased breakdown of [MVP.md](MVP.md). The repo is already scaffolded from the Ex
 - [x] Hint: GF(2) solver finds a shortest solution and the Hint button highlights one tile to tap. A win after a hint does not set a best score.
 - [ ] Undo, Timer, Levels, Daily puzzle, Themes and sound.
 
+## Phase 8: Unpredictability that stays solvable (ideas, not started)
+
+Goal: make each puzzle feel less predictable without ever producing an unsolvable board. The invariant behind all of these: every board is made by applying whole taps (in the active tap pattern) to a solved board, so a solution always exists.
+
+- [ ] **Gremlin:** every N moves (or seconds), a random tile is tapped for the player.
+  - It must be a full tap, not a single-tile flip. A lone flipped tile can make a 5x5 board unsolvable.
+  - The hint re-solves from the new state. Decide whether a gremlin tap counts as a move.
+  - Tune the frequency carefully so a surprise tap on a hard board doesn't feel unfair.
+- [ ] **Twist per puzzle:** each puzzle uses a different tap pattern: plus, X (diagonals), full row and column, or wrap-around edges.
+  - Generalize `toggle` and `generate` to take a pattern, and have the solver build its tap matrix from the same pattern.
+  - Show the active pattern to the player (an icon or a short preview), since they must re-learn it each puzzle.
+  - Key best scores by size and pattern.
+- [ ] **Locked tiles:** a few tiles ignore taps but still toggle when a neighbor is tapped.
+  - Scramble from the solved board using only tappable tiles.
+  - The solver must treat locked tiles as unavailable taps and can return no solution, so generation has to confirm solvability.
+  - Draw locked tiles distinctly.
+
+Suggested order: twist per puzzle, then locked tiles, then gremlin.
+
 ## Open decisions
 
 1. **Orientation:** portrait-only (simpler) or unlocked?
